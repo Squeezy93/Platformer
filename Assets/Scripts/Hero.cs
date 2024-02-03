@@ -30,21 +30,21 @@ namespace Assets.Scripts
 
         private void FixedUpdate()
         {
+            _rb.velocity = new Vector2(_direction.x * _speed, _rb.velocity.y);
 
             var isJumping = _direction.y > 0;
             if (isJumping)
             {
-                if (IsGrounded())
+                if (IsGrounded() && _rb.velocity.y <= 0)
                 {
-                    _rb.velocity = new Vector2(_rb.velocity.x, 0f);
                     _rb.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Impulse);
                 }
-                else if (_rb.velocity.y > 0)
-                {
-                    _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
-                }
             }
-            _rb.velocity = new Vector2(_direction.x * _speed, _rb.velocity.y);
+            else if (_rb.velocity.y > 0)
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
+            }
+
         }
     }
 }
