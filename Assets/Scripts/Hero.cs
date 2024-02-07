@@ -4,6 +4,8 @@ namespace Assets.Scripts
 {
     public class Hero : MonoBehaviour
     {
+        [SerializeField] private int _coins;
+
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpSpeed;
 
@@ -45,6 +47,12 @@ namespace Assets.Scripts
                 _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
             }
 
+        }
+
+        public void AmountCoinsToAdd(int amount)
+        {
+            _coins += amount;
+            Debug.Log($"{amount} coins were added. Total amount of coins = {_coins}");
         }
     }
 }
